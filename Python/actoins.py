@@ -2,6 +2,13 @@ import subprocess
 import os
 import keyboard
 
+__all__ = ["run_app",
+           "open_folder",
+           "vol_up",
+           "vol_down",
+           "vol_mute",
+           ]
+
 
 def run_app(path):
     '''
