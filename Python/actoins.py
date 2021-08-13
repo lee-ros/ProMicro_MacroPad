@@ -1,10 +1,12 @@
 import subprocess
 import os
+import keyboard
 
 
 def run_app(path):
     '''
-    this function is used to launch an app
+    Launch an app
+
     Params:
         path - an absolute path to .exe file
     '''
@@ -18,7 +20,8 @@ def run_app(path):
 
 def open_folder(path):
     '''
-    this function is used to launch the explorer at the given folder
+    Launch the explorer at the given folder
+
     Params:
         path - an absolute path to a folder
     '''
@@ -26,3 +29,24 @@ def open_folder(path):
         subprocess.Popen(f'explorer.exe {path}')
     else:
         raise Exception('The path given is not a directory')
+
+
+def vol_up():
+    '''
+    Sets the main audio output 2 points up
+    '''
+    keyboard.send('volume_up')
+
+
+def vol_down():
+    '''
+    Sets the main audio output 2 points down
+    '''
+    keyboard.send('volume_down')
+
+
+def vol_mute():
+    '''
+    Mute / Unmute main audio
+    '''
+    keyboard.send('volume_mute')
