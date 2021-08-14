@@ -20,12 +20,12 @@ def run_app(path):
     Launch an app
 
     Params:
-        path - an absolute path to .exe file
+        path - an absolute path to .exe / .lnk file
     '''
     if(not os.path.exists(path)):
         raise FileNotFoundError('The path does not exists')
     if(os.access(path, os.X_OK)):
-        subprocess.Popen(path)
+        os.startfile(path)
     else:
         raise Exception('The path is not an executable file')
 
@@ -38,7 +38,7 @@ def open_folder(path):
         path - an absolute path to a folder
     '''
     if(os.path.isdir(path)):
-        subprocess.Popen(f'explorer.exe {path}')
+        os.startfile(path)
     else:
         raise Exception('The path given is not a directory')
 
