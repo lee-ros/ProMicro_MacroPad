@@ -1,26 +1,34 @@
+import json
+import os
 import keyboard
 from time import sleep
 
-from actoins import run_app, open_folder
-#import actions
-
-# key:function mapping
-key_functions = {
-    'F13': lambda: print('F13 is pressed'),
-    'F14': lambda: print('F14 is pressed'),
-    'F15': lambda: print('F15 is pressed'),
-    'F16': lambda: print('F16 is pressed'),
-    'F17': lambda: print('F17 is pressed'),
-    'F18': lambda: print('F18 is pressed'),
-    'F19': lambda: print('F19 is pressed'),
-    'F20': lambda: print('F20 is pressed'),
-    'F21': lambda: print('F21 is pressed'),
-}
+from actions import *
+import actions as actions
+from dummy_config import dummy_config
 
 
-# Define key bindings
-for key, value in key_functions.items():
-    keyboard.add_hotkey(key, value)
+def config_to_func(action, args):
+    if action == '':
+        return lambda: placeholder()
+    else:
+        return lambda: getattr(actions, action)(args)
+
+
+def update_key_binding(key, function):
+    pass
+
+
+if not os.path.exists('config.json'):
+    with open('config.json', 'w') as conf:
+        json.dump(dummy_config, conf)
+
+with open('config.json', 'r') as conf:
+    config = json.load(conf)
+
+    for key, value in config.items():
+        action = config_to_func(value['action'], value['args'])
+        keyboard.add_hotkey(key, action)
 
 
 # Sleeping to keep script alive
