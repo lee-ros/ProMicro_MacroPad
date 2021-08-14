@@ -7,7 +7,12 @@ __all__ = ["run_app",
            "vol_up",
            "vol_down",
            "vol_mute",
+           "placeholder",
            ]
+
+
+def placeholder():
+    print('Placeholder function')
 
 
 def run_app(path):
