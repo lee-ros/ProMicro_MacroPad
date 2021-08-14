@@ -11,6 +11,8 @@ from dummy_config import dummy_config
 def config_to_func(action, args):
     if action == '':
         return lambda: placeholder()
+    elif args == '':
+        return lambda: getattr(actions, action)()
     else:
         return lambda: getattr(actions, action)(args)
 
