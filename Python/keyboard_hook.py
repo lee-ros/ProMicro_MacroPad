@@ -22,9 +22,11 @@ def update_key_binding(key, function):
 
 
 # Create an empty config file if none is found
-if not os.path.exists('config.json'):
-    with open('config.json', 'w') as conf:
-        json.dump(dummy_config, conf)
+def get_config():
+    if not os.path.exists('config.json'):
+        with open('config.json', 'w') as conf:
+            json.dump(dummy_config, conf)
+
 
 # load config file and setup the hotkey for the first time
 with open('config.json', 'r') as conf:
