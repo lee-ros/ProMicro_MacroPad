@@ -21,22 +21,44 @@ def update_key_binding(key, function):
     pass
 
 
-# Create an empty config file if none is found
-def get_config():
+def check_config():
+    '''
+    Check if there is a config file in the same directory.
+    if it can't file a config it will create a new one.
+    '''
     if not os.path.exists('config.json'):
         with open('config.json', 'w') as conf:
             json.dump(dummy_config, conf)
 
 
-# load config file and setup the hotkey for the first time
-with open('config.json', 'r') as conf:
-    config = json.load(conf)
+def load_config():
+    '''
+    Reads the config file - currently set to the same directory!
 
+    Returns:
+        dict - contains all the config settings
+    '''
+    try:
+        with open('config.json', 'r') as conf:
+            config = json.load(conf)
+            return config
+    except FileNotFoundError:
+        print("No config file was found")
+
+
+def set_current_config(config):
+    '''
+    Sets all the actions from the loaded config file
+    '''
     for key, value in config.items():
         action = config_to_func(value['action'], value['args'])
         keyboard.add_hotkey(key, action)
 
 
-# Sleeping to keep script alive
-while True:
-    sleep(1)
+if __name__ == "__main__":
+    check_config()
+    config = load_config()
+    set_current_config(config)
+
+    while True:
+        sleep(10)
