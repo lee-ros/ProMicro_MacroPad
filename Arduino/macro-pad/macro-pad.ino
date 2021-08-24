@@ -74,7 +74,7 @@ class button {
   }
  
   private:
-  const unsigned long debounceTime = 30;
+  const unsigned long debounceTime = 50;
   unsigned long lastPressed = 0;
   boolean pressed = 0;
 } ;
