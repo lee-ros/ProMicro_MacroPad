@@ -2,6 +2,7 @@ import json
 import os
 import keyboard
 from time import sleep
+from sys import exit
 
 from actions import *
 import actions as actions
@@ -54,6 +55,9 @@ def set_current_config(config):
         action = config_to_func(value['action'], value['args'])
         keyboard.add_hotkey(key, action)
 
+    # Adding akey combo for quiting the script
+    keyboard.add_hotkey('F13+F21', exit)
+
 
 if __name__ == "__main__":
     check_config()
@@ -61,4 +65,4 @@ if __name__ == "__main__":
     set_current_config(config)
 
     while True:
-        sleep(10)
+        sleep(1)
